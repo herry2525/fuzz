@@ -1,0 +1,242 @@
+Vulnerabilities to check
+
+
+1. Rate limit
+
+X-Originating-IP: 127.0.0.1
+X-Forwarded-For: 127.0.0.1
+X-Remote-IP: 127.0.0.1
+X-Remote-Addr: 127.0.0.1
+X-Rewrite-URL: 127.0.0.1
+
+================================================
+2. Host Header
+
+On password reset
+X-Forwarded-For: 127.0.0.1
+
+Host: site.com
+HOST: evil.com
+
+=================================================
+3. URL redirection
+
+GET based
+
+POST based
+
+=================================================
+
+4. ClickJacking
+
+CSP bypass
+
+SOP bypass
+
+Iframe bypass
+
+Click Account takeover
+
+==================================================
+
+5. Session issues
+
+Using cookie editor
+
+Failure to invalidate: email, password, phone number
+
+Account delete issue: No password validation
+
+Repeating burpsuite session multiple times after password change
+
+====================================================
+
+6. 2FA bypass
+
+Google SSO
+
+Bruteforce
+
+Reset password link
+
+Response tampering
+
+Parameter abuse
+
+Blank code forward
+
+Set value as 0
+
+====================================================
+
+
+7. Account lockout
+
+Bruteforce
+
+Own login resposne for victim
+
+OTP bruteforce
+
+=====================================================
+
+8. Weak passwords
+
+123456
+
+qwerty
+
+password
+
+======================================================
+
+9. CORS misconfiguration
+
+curl http://site.com -H "Origin:http://evil.com" -I
+
+if it is access-allow-origin:* - not exploitable
+origin: evil.com
+origin: site.evil.com
+origin: null
+
+
+========================================================
+
+10. parameter tampering
+
+Quantity -1
+
+Price=0.1
+
+Product=1&Price=1000 (Product 100: Product=100&Price=1000 )
+
+
+==========================================================
+
+
+11. Subdomain Takeover
+
+signingup on service provider like github, heroku, shopify, zendesk, aws, tumblr etc to takeover domains
+
+
+============================================================
+
+
+12. Broken Link hijacking
+
+https://www.brokenlinkcheck.com/
+
+
+==============================================================
+
+13. Blind XSS
+
+
+Look for blind xss in pages like ( contact us, log viewers, feedbackpage, chatapp,
+ticket generation app, any app use moderation or updation, saving forms)
+
+online tool used - xsshunter.com
+
+===============================================================
+
+14. Long password dos attack
+
+
+give password more then the length - forward the request
+
+
+=================================================================
+
+15. CSRF
+
+Another user token
+
+Token=null
+
+Token=token_lenth_alphabets (abcdefghijklmn)
+
+Remove token
+
+Change content type
+
+Remove referer header
+
+Actions: 2fa disable, Account delete, Email change, Phone number chnage, profile photo update , Name change
+
+=================================================================
+
+16. Account takeover
+
+A. Host header injection
+B. CSRF email update
+
+Sending password reset add extra parameter like email or username
+
+Google SSO
+
+Signup with same email 
+Use old valid response to bypass
+
+
+Create account on website + Android app with same email ID
+
+==================================================================
+
+17. RCE
+
+
+File upload
+
+Jira servers
+
+Blind RCE (feedback form, chatbox, sending any reques from client side to server side)
+
+=================================================================
+
+
+18. SSRF
+
+Comment injection
+
+URL redirection
+
+Add link function
+
+Create account function
+
+
+=============================================================
+
+
+Homograph IDN attack
+
+1.Open the burp collaborator client > Generate Collaborator payload .
+
+2.Go to the sign up page of target.com and create a new account with email- abc@gmail.com.burpcollaboratorpayloadhere
+
+3.Now if the target.com has email confirmation > you will receive the email confirmation link in burp collaborator client > verify the email.
+
+4.Go to password reset page of target.com > enter email as abc@gmáil.com.burpcollaboratorpayloadhere
+
+5.If the target.com is vulnerable then it will send password reset link to the mail- abc@xn — gmil-6na.com.burpcollaboratorpayloadhere and you will receive password reset link in burp 
+
+6.collaborator client. Make sure to check in burp collaborator client -received email details: To- abc@xn — gmil-6na.com.burpcollaboratorpayloadhere.
+
+7.Now you can change the password and access the victim’s account.
+
+
+=================================================================================================
+
+site:s3.amazonaws.com example
+site:s3.amazonaws.com example.com
+site:s3.amazonaws.com example-com
+site:s3.amazonaws.com com.example
+site:s3.amazonaws.com com-example
+
+
+
+
+
+
+
+
